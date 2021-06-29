@@ -9,22 +9,26 @@ public class GameManager : MonoBehaviour
     // This class will handle spawning rocks, keeping score etc
     public GameObject rockPrefab;
     public GameObject playerPrefab;
+
     public Text livesLeft;
     public Text score;
     public Text messagePlaceHolder;
     public Text level;
+    
     private string messagePlaceholderTxt;
-    public int rockSpeed = 150;
-    private float launchRockInterval = 1.0f;
+    private float launchRockInterval = 2;
     private bool launchRockIntervalChanged = false;
     private int rocksNeededToPassLevel = 5;
     private int currentLevel = 1;
     private int maxLevel = 10;
-    public bool keepLaunchingRocks = true;
-    public bool playerDied = false;
+    private int rocksTakenOut = 0;
+    private int playerScore = 0;
+    private bool keepLaunchingRocks = true;
+    private bool playerDied = false;
+    
+    public int rockSpeed = 150;
     public float playerRespawnTime = 3;
     public int playerLivesLeft = 3; // Stored here since player/spaceship obj will be destroyed
-    public int playerScore = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,6 @@ public class GameManager : MonoBehaviour
 
         // Launching a rock every x seconds.
         InvokeRepeating("LaunchRocks", 2.0f, launchRockInterval);
-
     }
 
     // Update is called once per frame
@@ -57,16 +60,18 @@ public class GameManager : MonoBehaviour
 
         if (playerDied) 
         {
-            float intervalTime = launchRockInterval;
-
-            if (intervalTime <= 0)
+            if (playerRespawnTime > 0)
             {
-                intervalTime -= Time.deltaTime;
+                playerRespawnTime -= Time.deltaTime;
             }
             else 
             {
-                // Spawn new player object here
+                Debug.Log("lessthen");
+                // Spawning new player object
                 Instantiate(playerPrefab);
+                InvokeRepeating("LaunchRocks", 2.0f, launchRockInterval);
+                playerDied = false;
+                playerRespawnTime = 3;
             }
         }
 
@@ -115,23 +120,22 @@ public class GameManager : MonoBehaviour
 
     private void LaunchRocks()
     {
-        int randomNum = Random.Range(1, 3);
-            
-        switch(randomNum) 
+        int randomNum = Random.Range(1, 4);
+
+        switch (randomNum)
         {
             case 1:
                 LaunchRock("left");
-                break;                
+                break;
             case 2:
                 LaunchRock("top");
-                break;                
+                break;
             case 3:
                 LaunchRock("right");
                 break;
         }
     }
-
-    private void NextLevel() 
+    public void NextLevel() 
     {
         // Increasing level and rocks needed
         currentLevel += 1;
@@ -140,6 +144,8 @@ public class GameManager : MonoBehaviour
 
         if (launchRockInterval <= 0)
             launchRockInterval = 0.1f;
+
+        launchRockIntervalChanged = true;
     }
 
     // Print a message to the message placeholder
@@ -152,8 +158,27 @@ public class GameManager : MonoBehaviour
     public void LostLive()
     {
         keepLaunchingRocks = false;
+        DeleteAllRocks();
         playerLivesLeft -= 1;
-        PrintMessage("Live lost " + playerLivesLeft + " lives remaining");
+        PrintMessage("Live lost, respawning in " + playerRespawnTime.ToString() + " seconds");
         playerDied = true;
+    }
+
+    // Function to delete all rocks currently in the scene
+    private void DeleteAllRocks() 
+    {
+        GameObject[] rocks = GameObject.FindGameObjectsWithTag("Rock");
+        
+        foreach (GameObject rock in rocks) 
+        {
+            Destroy(rock);
+        }
+    }
+
+    // Function to handle a rock being destroyed
+    public void RockDestroyed() 
+    {
+        playerScore += 10;
+        rocksTakenOut += 1;
     }
 }

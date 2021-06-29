@@ -12,17 +12,6 @@ public class Rock : MonoBehaviour
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Checking if the rock was hit by a bullet.
-        if (collision.collider.tag.ToLower() == "bullet") 
-        {
-            // Destroying the rock and the bullet.
-            Destroy(this.gameObject);
-            Destroy(collision.gameObject);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 

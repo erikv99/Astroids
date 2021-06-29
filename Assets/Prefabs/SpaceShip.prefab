@@ -199,8 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12356adf56e1cc444ba4d1d0ad6682e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2739458115097776780, guid: 969c0599b7f82cf47a3dfedb3c6cdc85, type: 3}
-  gameManagerScript: {fileID: 0}
+  bulletPrefab: {fileID: 7564072104830510078, guid: 969c0599b7f82cf47a3dfedb3c6cdc85, type: 3}
   movementSpeed: 250
   bulletSpeed: 400
   rotationDegreesPerSecond: 150

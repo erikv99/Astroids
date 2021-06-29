@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public GameManager gameManagerScript;
     public int movementSpeed = 250;
     public int bulletSpeed = 400;
     public int rotationDegreesPerSecond = 360;
@@ -17,9 +16,6 @@ public class Player : MonoBehaviour
     {
         // Getting the rigid body of the player
         rb = GetComponent<Rigidbody2D>();
-
-        // Getting the gamemanager script
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame

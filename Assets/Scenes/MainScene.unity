@@ -713,7 +713,7 @@ PrefabInstance:
     - target: {fileID: 133644813372241832, guid: a50248d27df50af40adcb3dd49dde39d, type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 996842758635821352}
+      objectReference: {fileID: 996842759185415701, guid: 2a886c905091489458d862b7a47a0271, type: 3}
     - target: {fileID: 133644813372241832, guid: a50248d27df50af40adcb3dd49dde39d, type: 3}
       propertyPath: messagePlaceHolder
       value: 
@@ -825,8 +825,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a886c905091489458d862b7a47a0271, type: 3}
---- !u!1 &996842758635821352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 996842759185415701, guid: 2a886c905091489458d862b7a47a0271, type: 3}
-  m_PrefabInstance: {fileID: 996842758635821351}
-  m_PrefabAsset: {fileID: 0}
