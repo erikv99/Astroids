@@ -25,10 +25,6 @@ public class Rock : MonoBehaviour
                 gameManagerScript.LostLive();
             }
             // If the rock didnt hit a player it hit a border so it will be destroyed as well
-            else 
-            {
-                Debug.Log("Destroyed rock (OOB)");
-            }
             Destroy(this.gameObject);
         }
     }
